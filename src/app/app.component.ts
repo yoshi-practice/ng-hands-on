@@ -1,3 +1,6 @@
+import { Observable } from 'rxjs';
+import { GithubApiService } from './services/github-api.service';
+import { Repository } from './types/repository.type';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +10,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ng-handson';
+  repos$;
+
+  constructor(private githubApiService: GithubApiService) {
+  
+    
+  }
+
+  ngOnInit() {
+    this.repos$ = this.githubApiService.getRepos();
+  }
+ 
 }
+
