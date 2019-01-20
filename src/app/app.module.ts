@@ -5,8 +5,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
-import { GithubApiService } from './services/github-api.service';
+import { GithubApiService } from './services/github-api.service' 
+import { FormsModule } from '@angular/forms'
 import { RepositoryComponent } from './components/repository/repository.component' 
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { RepositoryComponent } from './components/repository/repository.componen
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [GithubApiService],
   bootstrap: [AppComponent]
