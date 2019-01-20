@@ -7,11 +7,14 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 import { GithubApiService } from './services/github-api.service' 
 import { FormsModule } from '@angular/forms'
+import { RepositoryComponent } from './components/repository/repository.component' 
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    RepositoryComponent
   ],
   imports: [
     BrowserModule,
