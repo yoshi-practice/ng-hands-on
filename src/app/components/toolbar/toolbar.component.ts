@@ -1,25 +1,40 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { debounceTime, filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.css']
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent implements OnInit, OnDestroy {
   @Output() search = new EventEmitter<string>();
 
-  title = 'gh-client'
-  searchWord: string;
+  title = 'gh-client';
+  searchWord = new FormControl();
+  private subscription: Subscription;
 
-  onClickSearch() {
-    if (this.searchWord) {
-      this.search.emit(this.searchWord);
-    }
+  constructor() {
+    this.subscription = new Subscription();
   }
-  
-  constructor() { }
 
   ngOnInit() {
+    const _sub = this.searchWord.valueChanges.pipe(
+      debounceTime(500),
+      filter(value => value !== '')
+    ).subscribe(value => this.search.emit(value));
+
+    this.subscription.add(_sub);
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  onClickSearch() {
+    if (this.searchWord.value) {
+      this.search.emit(this.searchWord.value);
+    }
+  }
 }
