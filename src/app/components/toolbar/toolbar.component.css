@@ -1,10 +1,12 @@
-:host{
+:host {
   height: 56px;
   width: 100%;
   position: fixed;
   top: 0;
-  background-color: #25292E;
-  color: #FFF;
+  background-color: #25292e;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-between;
 }
 
 .search {
